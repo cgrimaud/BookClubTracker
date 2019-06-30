@@ -1,0 +1,25 @@
+[
+    
+    {
+        "title": "Killers of the Flower Moon",
+        "author": "David Grann",
+        "genre": "Nonfiction",
+        "meetUpDate": "01/22/2019",
+        "meetUpLocation": "Longboard's Taco & Tiki"
+    },
+    {
+        "title": "The Guernsey Literary and Potato Peel Pie Society",
+        "author": "Mary Ann Shaffer & Annie Barrows",
+        "genre": "Fiction",
+        "meetUpDate": "03/01/2019",
+        "meetUpLocation": "New Wave Burritos"
+    },
+    {
+        "title": "Space Opera",
+        "author": "Catherynne M. Valente",
+        "genre": "Sci-Fi/Fantasy",
+        "meetUpDate": "04/05/2019",
+        "meetUpLocation": "Come Back Inn"
+    }
+
+]
