@@ -1,6 +1,7 @@
 [
     
     {
+        "id":  1,
         "title": "Killers of the Flower Moon",
         "author": "David Grann",
         "genre": "Nonfiction",
@@ -8,6 +9,7 @@
         "meetUpLocation": "Longboard's Taco & Tiki"
     },
     {
+        "id":  2,
         "title": "The Guernsey Literary and Potato Peel Pie Society",
         "author": "Mary Ann Shaffer & Annie Barrows",
         "genre": "Fiction",
@@ -15,6 +17,7 @@
         "meetUpLocation": "New Wave Burritos"
     },
     {
+        "id":  3,
         "title": "Space Opera",
         "author": "Catherynne M. Valente",
         "genre": "Sci-Fi/Fantasy",

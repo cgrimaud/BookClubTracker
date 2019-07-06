@@ -14,7 +14,8 @@ namespace BookClubTracker
 
     public class MeetUp
     {
-
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
         [JsonProperty(PropertyName = "author")]
