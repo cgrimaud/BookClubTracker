@@ -31,8 +31,8 @@ namespace BookClubTracker
 
         public static void SerializeMeetUpsToFile(List<MeetUp> meetUps, string fileName)
         {
-            // I commmented out the below and added it to line 39 out of curiosity
-            //var serializer = new JsonSerializer();
+            
+         
             using (var writer = new StreamWriter(fileName))
             using (var jsonWriter = new JsonTextWriter(writer))
             {
@@ -40,6 +40,14 @@ namespace BookClubTracker
                 serializer.Serialize(jsonWriter, meetUps);
             }
 
+        }
+
+        public static void SaveToFile(List<MeetUp> meetUps)
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo directory = new DirectoryInfo(currentDirectory);
+            var fileName = Path.Combine(directory.FullName, "books.json");
+            JsonFileManager.SerializeMeetUpsToFile(meetUps, fileName);
         }
 
         public static List<MeetUp> GetListOfAllMeetUps()
