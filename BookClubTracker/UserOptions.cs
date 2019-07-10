@@ -15,41 +15,41 @@ namespace BookClubTracker
             do
             {
                 Menus.MainMenu();
+
                 userInput = Convert.ToInt32(Console.ReadLine());
-
-                switch (userInput)
-                {
-                    case 1:
-                        DisplayAllMeetUps();
-                        break;
-                    case 2:
-                        AddNewMeetUpToList(meetUps);
-                        break;
-                    case 3:
-                        EditMeetUp(meetUps);
-                        System.Threading.Thread.Sleep(1000);
-                        break;
-                    case 4:
-                        DeleteMeetUp(meetUps);
-                        System.Threading.Thread.Sleep(1000);
-                        break;
-                    case 5:
-                        Console.WriteLine("Goodbye!");
-                        break;
-                    default:
-                        Console.Clear();
-                        Console.WriteLine();
-                        Console.WriteLine(" Error: Invalid Choice");
-                        System.Threading.Thread.Sleep(1000);
-                        break;
-
-                }
+               
+                    switch (userInput)
+                    {
+                        case 1:
+                            DisplayAllMeetUps();
+                            break;
+                        case 2:
+                            AddNewMeetUpToList(meetUps);
+                            break;
+                        case 3:
+                            EditMeetUp(meetUps);
+                            break;
+                        case 4:
+                            DeleteMeetUp(meetUps);
+                            break;
+                        case 5:
+                            Console.WriteLine("Goodbye!");
+                            break;
+                        default:
+                            Console.Clear();
+                            Console.WriteLine();
+                            Console.WriteLine(" Error: Invalid Choice");
+                            System.Threading.Thread.Sleep(1000);
+                            break;
+                    }
+                
             } while (userInput != 5);
         }
 
         public static void DisplayAllMeetUps()
         {
             var meetUps = JsonFileManager.GetListOfAllMeetUps();
+            Console.Clear();
             foreach (var meetUp in meetUps)
             {
                 Console.WriteLine("ID: " + meetUp.Id);
@@ -69,9 +69,7 @@ namespace BookClubTracker
         {
             var meetUp = new MeetUp();
 
-            // TODO: write method to add id automatically
-            Console.Write("ID: ");
-            meetUp.Id = Convert.ToInt32(Console.ReadLine());
+            meetUp.Id = GetNextId(meetUps);
 
             Console.Write("Book Title: ");
             meetUp.Title = Console.ReadLine();
@@ -89,6 +87,9 @@ namespace BookClubTracker
             meetUp.MeetUpLocation = Console.ReadLine();
 
             meetUps.Add(meetUp);
+            Console.WriteLine();
+            Console.WriteLine("Your Meet Up has been added!");
+            System.Threading.Thread.Sleep(1500);
 
             JsonFileManager.SaveToFile(meetUps);
 
@@ -97,30 +98,49 @@ namespace BookClubTracker
 
         public static List<MeetUp> DeleteMeetUp(List<MeetUp> meetUps)
         {
-           
-            // TODO: Provide truncated listed of options?
-            Console.Write("Enter ID of meet up you want to delete: ");
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("Delete a Meet Up");
+            Console.WriteLine();
+            foreach (var meetUp in meetUps)
+            {
+                Console.WriteLine(meetUp.Id + ". " + meetUp.Title);
+            }
+            Console.WriteLine();
+            Console.Write("Enter ID of meet up you want to delete or select 0 to exit: ");
             int.TryParse(Console.ReadLine(), out var meetUpId);
 
             var meetUpToDelete = meetUps.SingleOrDefault(m => m.Id == meetUpId);
 
-            if(meetUpToDelete != null)
+            if (meetUpToDelete != null)
             {
                 meetUps.Remove(meetUpToDelete);
                 Console.WriteLine($"The Meet Up with ID {meetUpId} has been deleted.");
+                System.Threading.Thread.Sleep(1500);
+                JsonFileManager.SaveToFile(meetUps);
             }
             else
             {
                 Console.Write($"Could not find a Meet Up with ID: {meetUpId}.");
+                System.Threading.Thread.Sleep(1000);
             }
 
-            JsonFileManager.SaveToFile(meetUps);
+            
 
             return meetUps;
         }
 
         public static List<MeetUp> EditMeetUp(List<MeetUp> meetUps)
         {
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("Edit a Meet Up");
+            Console.WriteLine();
+            foreach (var M in meetUps)
+            {
+                Console.WriteLine(M.Id + ". " + M.Title);
+            }
+            Console.WriteLine();
             Console.Write("Enter ID of meet up you want to edit: ");
             int.TryParse(Console.ReadLine(), out var meetUp);
 
@@ -174,21 +194,25 @@ namespace BookClubTracker
             return meetUps;
         }
 
+        private static int GetNextId(List<MeetUp> meetUps)
+        {
+            int returnValue = 1;
 
-        // Edit option
-        // User selects Meet Up by ID
-        // That Meet Up appears on Console 
-        //  Select the field you wish to edit:
-            // 1. title: {current info listed here}
-            // 2. Author: {current info listed here}
-            // 3. Genre: {current info listed here}
-            // 4. Meet up Date: {current info listed here}
-            // 5. Meet up Location: {current info listed here}
-            // 6. Save & Exit
-       // user selects number and updates data
-       // list appears again with updated info in the field
-       // user can continue to edit fields
-       // on 6, do the save and redisplay main menu
+            
+                if (meetUps.Any())
+                {
+                    //get the meet up with the highest ID
+                    var meetUp = meetUps.OrderByDescending(m => m.Id).FirstOrDefault();
+
+                    // add 1 to the highest meet up id that already exists
+                    int id = meetUp.Id;
+                    id++;
+                    returnValue = id;
+                }
+          
+
+            return returnValue;
+        }
 
 
     }

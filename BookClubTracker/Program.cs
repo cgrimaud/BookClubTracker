@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+
 
 
 namespace BookClubTracker
@@ -11,7 +9,7 @@ namespace BookClubTracker
         
         static void Main(string[] args)
         {
-
+            // var meetups contains the JSON data
             var meetUps = JsonFileManager.GetListOfAllMeetUps();
             
             UserOptions.Run(meetUps);

@@ -19,8 +19,7 @@ namespace BookClubTracker
             Console.WriteLine("5. Exit");
             Console.WriteLine();
             Console.Write("Selection: ");
-
-
+      
         }
 
         public static void EditMenu(MeetUp meetUpToEdit)
