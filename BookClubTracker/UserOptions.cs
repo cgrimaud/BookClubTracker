@@ -12,6 +12,7 @@ namespace BookClubTracker
         {
 
             int userInput = 0;
+            // Loops through all of the options until user selects option 5 which ends the program
             do
             {
                 Menus.MainMenu();
@@ -197,7 +198,6 @@ namespace BookClubTracker
         private static int GetNextId(List<MeetUp> meetUps)
         {
             int returnValue = 1;
-
             
                 if (meetUps.Any())
                 {
@@ -210,7 +210,6 @@ namespace BookClubTracker
                     returnValue = id;
                 }
           
-
             return returnValue;
         }
 
