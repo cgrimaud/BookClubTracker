@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace BookClubTracker
 {
@@ -16,9 +17,9 @@ namespace BookClubTracker
             do
             {
                 Menus.MainMenu();
+                var input = Console.ReadLine();
+                userInput = MenuValidator(input);
 
-                userInput = Convert.ToInt32(Console.ReadLine());
-               
                     switch (userInput)
                     {
                         case 1:
@@ -110,6 +111,10 @@ namespace BookClubTracker
             Console.WriteLine();
             Console.Write("Enter ID of meet up you want to delete or select 0 to exit: ");
             int.TryParse(Console.ReadLine(), out var meetUpId);
+            if (meetUpId == 0)
+            {
+                return meetUps;
+            }
 
             var meetUpToDelete = meetUps.SingleOrDefault(m => m.Id == meetUpId);
 
@@ -125,8 +130,6 @@ namespace BookClubTracker
                 Console.Write($"Could not find a Meet Up with ID: {meetUpId}.");
                 System.Threading.Thread.Sleep(1000);
             }
-
-            
 
             return meetUps;
         }
@@ -152,8 +155,9 @@ namespace BookClubTracker
             {
                 Menus.EditMenu(meetUpToEdit);
 
-               
-                userInput = Convert.ToInt32(Console.ReadLine());
+                var input = Console.ReadLine();
+                userInput = MenuValidator(input);
+                
 
                 switch (userInput)
                 {
@@ -211,6 +215,18 @@ namespace BookClubTracker
                 }
           
             return returnValue;
+        }
+
+        public static int MenuValidator(string input)
+        {
+            if (String.IsNullOrEmpty(input) || !Regex.IsMatch(input, @"^\d+$"))
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(input);
+            }
         }
 
 

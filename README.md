@@ -6,4 +6,4 @@ The user can view all of the meet ups, add a new meet up, edit a past meet up, o
 
 Any changes the user makes to the meet ups will dynamically change the MeetUps list object. The next time the user runs the application, those changes will still be apparent. 
 
-*Note: this application does not currently contain any validation.*
+*Note: this application contains minimal validation.*
